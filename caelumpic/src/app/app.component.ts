@@ -10,5 +10,12 @@ import { Http } from '@angular/http';
 export class AppComponent {
   title: string = 'Caelum Pic';
   fotos: Object[] = [];
-  constructor(http: Http) { }
+  constructor(http: Http) {
+    http.get('http://localhost:3000/v1/fotos')
+      .map(res => res.json())
+      .subscribe(
+      fotos => this.fotos = fotos,
+      erro => console.log(erro)
+      );
+  }
 }
