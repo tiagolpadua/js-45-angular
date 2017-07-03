@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import { Http } from '@angular/http';
 
 @Component({
   moduleId: module.id,
@@ -7,5 +8,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Caelum Pic';
+  title: string = 'Caelum Pic';
+  fotos: Object[] = [];
+  constructor(http: Http) { }
 }
