@@ -19,7 +19,13 @@ export class ListagemComponent {
   remove(foto: FotoComponent): void {
     this.service.remove(foto)
       .subscribe(
-      fotos => console.log('foto removida com sucesso'),
+      (fotos) => {
+        let novasFotos = this.fotos.slice(0);
+        let indice = novasFotos.indexOf(foto);
+        novasFotos.splice(indice, 1);
+        this.fotos = novasFotos;
+        console.log('Foto removida com sucesso');
+      },
       erro => console.log(erro)
       );
   }
