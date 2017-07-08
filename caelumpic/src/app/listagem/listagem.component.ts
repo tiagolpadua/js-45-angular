@@ -1,15 +1,14 @@
-import { Component, Input } from '@angular/core';
-import { Http } from '@angular/http';
-
+import { Component } from '@angular/core';
+import { FotoComponent } from '../foto/foto.component';
+import { FotoService } from '../foto/foto.service';
 @Component({
+  selector: 'listagem',
   templateUrl: './listagem.component.html'
 })
 export class ListagemComponent {
-  title: string = 'Caelum Pic';
-  fotos: Object[] = [];
-  constructor(http: Http) {
-    http.get('http://localhost:3000/v1/fotos')
-      .map(res => res.json())
+  fotos: FotoComponent[] = [];
+  constructor(service: FotoService) {
+    service.lista()
       .subscribe(
       fotos => this.fotos = fotos,
       erro => console.log(erro)
