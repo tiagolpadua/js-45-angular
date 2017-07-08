@@ -1,22 +1,24 @@
 <div class="container">
-  <form #meuForm="ngForm" (submit)="cadastrar($event)" class="row">
+  <form [formGroup]="meuForm" (submit)="cadastrar($event)" class="row">
     <div class="col-md-6">
       <div class="form-group">
         <label>Título</label>
-        <input required name="titulo" #titulo="ngModel" [(ngModel)]="foto.titulo" class="form-control">
-        <span *ngIf="titulo.invalid" class="form-control alert-danger">
-          Título obrigatório
-        </span>
+        <input name="titulo" [(ngModel)]="foto.titulo" formControlName="titulo" class="form-control">
+        <span *ngIf="meuForm.controls.titulo.invalid" class="form-control alert-danger">Título obrigatório</span>
       </div>
       <div class="form-group">
         <label>URL</label>
-        <input name="url" [(ngModel)]="foto.url" class="form-control">
+        <input name="url" [(ngModel)]="foto.url" formControlName="url" class="form-control">
+        <span *ngIf="meuForm.controls.url.invalid" class="form-control alert-danger">URL obrigatória</span>
       </div>
       <div class="form-group">
         <label>Descrição</label>
-        <textarea name="descricao" [(ngModel)]="foto.descricao" class="form-control"></textarea>
+        <textarea name="descricao" [(ngModel)]="foto.descricao" formControlName="descricao" class="form-control">
+        </textarea>
       </div>
-      <button type="submit" class="btn btn-primary" [disabled]="meuForm.form.invalid">Salvar</button>
+      <button type="submit" class="btn btn-primary" [disabled]="meuForm.invalid">
+        Salvar
+      </button>
       <a [routerLink]="['']" class="btn btn-primary">Voltar</a>
     </div>
   </form>
