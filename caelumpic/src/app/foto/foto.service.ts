@@ -19,11 +19,13 @@ export class FotoService {
             .map(resposta => resposta.json());
     }
 
-    cadastrar(foto: FotoComponent): Observable<Response> {
+    cadastrar(foto: FotoComponent): Observable<any> {
         return this.http.post(
             this.url
             , JSON.stringify(foto)
             , { headers: this.cabecalho }
+        ).map(
+            () => ({ mensagem: `Foto ${foto.titulo} cadastrada com sucesso` })
         );
     }
 
@@ -37,11 +39,13 @@ export class FotoService {
             .map(resposta => resposta.json());
     }
 
-    alterar(foto: FotoComponent): Observable<Response> {
+    alterar(foto: FotoComponent): Observable<any> {
         return this.http
             .put(`${this.url}/${foto._id}`
                 , JSON.stringify(foto)
                 , { headers: this.cabecalho }
-            );
+            ).map(
+                () => ({ mensagem: `Foto ${foto.titulo} alterada com sucesso` })
+            )
     }
 }

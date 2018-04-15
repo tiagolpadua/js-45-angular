@@ -37,8 +37,8 @@ export class CadastroComponent {
             this.servico
               .obterFoto(id)
               .subscribe(
-                dadosFoto => this.foto = dadosFoto
-                , erro => console.log(erro)
+                dadosFoto => this.foto = dadosFoto,
+                erro => console.log(erro)
               );
           }
         });
@@ -50,8 +50,8 @@ export class CadastroComponent {
       this.servico
         .alterar(this.foto)
         .subscribe(
-          () => {
-            this.mensagem = `Foto ${this.foto.titulo} alterada com sucesso`;
+          (retornoServico) => {
+            this.mensagem = retornoServico.mensagem;
             setTimeout(
               () => this.roteamento.navigate([''])
               , 5000
@@ -63,11 +63,10 @@ export class CadastroComponent {
       this.servico
         .cadastrar(this.foto)
         .subscribe(
-          () => {
-            this.mensagem = 'Foto salva com sucesso';
+          (retornoServico) => {
+            this.mensagem = retornoServico.mensagem;
             this.foto = new FotoComponent();
-
-            setTimeout( () => this.mensagem = '', 3000);
+            setTimeout(() => this.mensagem = '', 3000);
           },
           erro => console.log(erro)
         );
