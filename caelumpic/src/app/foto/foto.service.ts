@@ -36,4 +36,12 @@ export class FotoService {
             .get(`${this.url}/${id}`)
             .map(resposta => resposta.json());
     }
+
+    alterar(foto: FotoComponent): Observable<Response> {
+        return this.http
+            .put(`${this.url}/${foto._id}`
+                , JSON.stringify(foto)
+                , { headers: this.cabecalho }
+            );
+    }
 }

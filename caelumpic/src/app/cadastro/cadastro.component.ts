@@ -42,15 +42,25 @@ export class CadastroComponent {
         });
   }
 
-  cadastrar() {
-    console.log(this.foto);
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    this.servico
-      .cadastrar(this.foto)
-      .subscribe(() => {
-        this.foto = new FotoComponent();
-        console.log('Foto salva com sucesso');
-      }, erro => console.log(erro));
+  cadastrar(evento: Event) {
+    evento.preventDefault()
+    if (this.foto._id) {
+      this.servico
+        .alterar(this.foto)
+        .subscribe(
+          () => this.mensagem = `Foto ${this.foto.titulo} alterada com sucesso`,
+          erro => console.log(erro)
+        );
+    } else {
+      this.servico
+        .cadastrar(this.foto)
+        .subscribe(
+          () => {
+            this.mensagem = 'Foto salva com sucesso';
+            this.foto = new FotoComponent();
+          },
+          erro => console.log(erro)
+        );
+    }
   }
 }
