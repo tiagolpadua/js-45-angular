@@ -3,6 +3,14 @@ import { FotoComponent } from './foto.component';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 
+export class MensagensServico {
+    constructor(private _mensagem: string) {
+    }
+    public get mensagem(): string {
+        return this._mensagem;
+    }
+}
+
 @Injectable()
 export class FotoService {
     http: Http;
@@ -19,13 +27,13 @@ export class FotoService {
             .map(resposta => resposta.json());
     }
 
-    cadastrar(foto: FotoComponent): Observable<any> {
+    cadastrar(foto: FotoComponent): Observable<MensagensServico> {
         return this.http.post(
             this.url
             , JSON.stringify(foto)
             , { headers: this.cabecalho }
         ).map(
-            () => ({ mensagem: `Foto ${foto.titulo} cadastrada com sucesso` })
+            () => new MensagensServico(`Foto ${foto.titulo} cadastrada com sucesso`)
         );
     }
 
@@ -39,13 +47,13 @@ export class FotoService {
             .map(resposta => resposta.json());
     }
 
-    alterar(foto: FotoComponent): Observable<any> {
+    alterar(foto: FotoComponent): Observable<MensagensServico> {
         return this.http
             .put(`${this.url}/${foto._id}`
                 , JSON.stringify(foto)
                 , { headers: this.cabecalho }
             ).map(
-                () => ({ mensagem: `Foto ${foto.titulo} alterada com sucesso` })
-            )
+                () => new MensagensServico(`Foto ${foto.titulo} alterada com sucesso`)
+            );
     }
 }
