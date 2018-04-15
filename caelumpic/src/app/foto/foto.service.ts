@@ -13,6 +13,7 @@ export class FotoService {
         this.cabecalho = new Headers();
         this.cabecalho.append('Content-Type', 'application/json');
     }
+
     listar(): Observable<FotoComponent[]> {
         return this.http.get(this.url)
             .map(resposta => resposta.json());
@@ -28,5 +29,11 @@ export class FotoService {
 
     deletar(foto: FotoComponent): Observable<Response> {
         return this.http.delete(`${this.url}/${foto._id}`);
+    }
+
+    obterFoto(id: string): Observable<FotoComponent> {
+        return this.http
+            .get(`${this.url}/${id}`)
+            .map(resposta => resposta.json());
     }
 }
