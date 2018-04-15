@@ -9,6 +9,7 @@ export class ListagemComponent {
   title: string = 'Caelum Pic';
   fotos: FotoComponent[] = [];
   servico: FotoService;
+  mensagem: string = '';
 
   constructor(servico: FotoService) {
     this.servico = servico;
@@ -23,10 +24,13 @@ export class ListagemComponent {
     this.servico.deletar(foto)
       .subscribe(
         () => {
-          console.log('foto removida com sucesso');
+          this.mensagem = `${foto.titulo} removida com sucesso`;
           this.fotos = this.fotos.filter(f => f._id !== foto._id);
         },
-        erro => console.log(erro)
+        erro => {
+          console.log(erro);
+          this.mensagem = 'Não foi possível remover a foto';
+        }
       );
   }
 }

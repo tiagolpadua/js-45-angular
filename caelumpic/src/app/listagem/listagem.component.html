@@ -2,6 +2,7 @@
   <h1 class="text-center">Caelum Pic</h1>
 </div>
 <div class="container">
+  <p *ngIf="mensagem" class="alert alert-info">{{mensagem}}</p>
   <div class="row">
     <div class="col-md-12">
       <form>
@@ -25,6 +26,7 @@
       <foto titulo="{{foto.titulo}}" url="{{foto.url}}"></foto>
       <button (click)="remover(foto)" class="btn btn-danger btn-block">Remover</button>
     </painel>
-  </div><!-- fim row -->
+  </div>
+  <!-- fim row -->
   <!-- fim row -->
 </div>
