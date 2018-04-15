@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FotoService } from '../foto/foto.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FotoComponent } from '../foto/foto.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'cadastro',
@@ -14,10 +14,12 @@ export class CadastroComponent {
   foto: FotoComponent = new FotoComponent();
   rota: ActivatedRoute;
   mensagem: string = '';
+  roteamento: Router;
 
-  constructor(service: FotoService, fb: FormBuilder, rota: ActivatedRoute) {
+  constructor(service: FotoService, fb: FormBuilder, rota: ActivatedRoute, router: Router) {
     this.rota = rota;
     this.servico = service;
+    this.roteamento = router;
 
     this.meuForm = fb.group({
       titulo: ['', Validators.compose(
@@ -48,7 +50,13 @@ export class CadastroComponent {
       this.servico
         .alterar(this.foto)
         .subscribe(
-          () => this.mensagem = `Foto ${this.foto.titulo} alterada com sucesso`,
+          () => {
+            this.mensagem = `Foto ${this.foto.titulo} alterada com sucesso`;
+            setTimeout(
+              () => this.roteamento.navigate([''])
+              , 5000
+            );
+          },
           erro => console.log(erro)
         );
     } else {
@@ -58,6 +66,8 @@ export class CadastroComponent {
           () => {
             this.mensagem = 'Foto salva com sucesso';
             this.foto = new FotoComponent();
+
+            setTimeout( () => this.mensagem = '', 3000);
           },
           erro => console.log(erro)
         );
