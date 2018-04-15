@@ -25,4 +25,8 @@ export class FotoService {
             , { headers: this.cabecalho }
         );
     }
+
+    deletar(foto: FotoComponent): Observable<Response> {
+        return this.http.delete(`${this.url}/${foto._id}`);
+    }
 }

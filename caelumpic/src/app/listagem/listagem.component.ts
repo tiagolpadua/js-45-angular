@@ -8,8 +8,11 @@ import { FotoComponent } from '../foto/foto.component';
 export class ListagemComponent {
   title: string = 'Caelum Pic';
   fotos: Object[] = [];
+  servico: FotoService;
+
   constructor(servico: FotoService) {
-    servico.listar()
+    this.servico = servico;
+    this.servico.listar()
       .subscribe(
         fotos => this.fotos = fotos,
         erro => console.log(erro)
@@ -17,6 +20,10 @@ export class ListagemComponent {
   }
 
   remover(foto: FotoComponent): void {
-    console.log(foto.titulo);
+    this.servico.deletar(foto)
+      .subscribe(
+        () => console.log('foto removida com sucesso'),
+        erro => console.log(erro)
+      );
   }
 }
