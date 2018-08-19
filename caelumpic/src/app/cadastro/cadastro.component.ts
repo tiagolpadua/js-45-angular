@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { FotoService } from '../servicos/foto.service'; // Importou FotoService
+import { FotoService } from '../servicos/foto.service';
 import { FotoComponent } from '../foto/foto.component';
-import { ActivatedRoute } from '@angular/router'; // Importou ActivatedRoute
+import { ActivatedRoute, Router } from '@angular/router'; // Importou Router
 @Component({
     selector: 'cadastro',
     templateUrl: './cadastro.component.html'
@@ -9,7 +9,8 @@ import { ActivatedRoute } from '@angular/router'; // Importou ActivatedRoute
 export class CadastroComponent {
     foto = new FotoComponent();
     constructor(private servico: FotoService
-        , private rota: ActivatedRoute) {
+        , private rota: ActivatedRoute
+        , private roteador: Router) { // Injetou Router
         this.rota.params
             .subscribe(
                 parametros => {
@@ -26,7 +27,14 @@ export class CadastroComponent {
             this.servico
                 .alterar(this.foto)
                 .subscribe(
-                    () => console.log(`Foto ${this.foto.titulo} alterada com sucesso`)
+                    () => {
+                        console.log(`Foto ${this.foto.titulo} alterada com sucesso`);
+                        // Navegar após 3 segundos
+                        setTimeout(
+                            () => this.roteador.navigate([''])
+                            , 3000
+                        );
+                    }
                     , erro => console.log(erro)
                 );
         } else {
