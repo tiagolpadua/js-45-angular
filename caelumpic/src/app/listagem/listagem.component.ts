@@ -20,9 +20,10 @@ export class ListagemComponent {
         this.servico
             .deletar(foto)
             .subscribe(
-                () => {
-                    this.mensagem = `Foto ${foto.titulo} apagada com sucesso!`;
-                    this.listaFotos = this.listaFotos.filter(f => f._id !== foto._id); // Usando filter
+                // agora temos um objeto disponível
+                mensagemServico => {
+                    this.mensagem = mensagemServico.mensagem;
+                    this.listaFotos = this.listaFotos.filter(f => f._id !== foto._id);
                     setTimeout(
                         () => this.mensagem = ''
                         , 2000
