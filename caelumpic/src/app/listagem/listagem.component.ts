@@ -19,7 +19,10 @@ export class ListagemComponent {
         this.servico
             .deletar(foto)
             .subscribe(
-                () => console.log(`Foto ${foto.titulo} apagada com sucesso!`)
+                () => {
+                    console.log(`Foto ${foto.titulo} apagada com sucesso!`);
+                    this.listaFotos = this.listaFotos.filter(f => f._id !== foto._id); // Usando filter
+                }
                 , erro => console.log(erro)
             );
     }
