@@ -1,15 +1,15 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
-import { FotoModule } from './foto/foto.module';
-import { PainelModule } from './painel/painel.module';
-import { CadastroComponent } from './cadastro/cadastro.component';
-import { ListagemComponent } from './listagem/listagem.component';
 import { roteamento } from './app.routes';
-import { FotoService } from './servicos/foto.service'; // Importou FotoService
+import { CadastroComponent } from './cadastro/cadastro.component';
+import { FotoModule } from './foto/foto.module';
+import { ListagemComponent } from './listagem/listagem.component';
 import { MensagemComponent } from './mensagem/mensagem.component';
+import { PainelModule } from './painel/painel.module';
+import { FotoService } from './servicos/foto.service'; // Importou FotoService
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,10 +23,11 @@ import { MensagemComponent } from './mensagem/mensagem.component';
     FormsModule,
     FotoModule,
     PainelModule,
-    roteamento
+    roteamento,
+    ReactiveFormsModule
   ],
   providers: [
-    FotoService // Adicionou FotoService
+    FotoService
   ],
   bootstrap: [AppComponent]
 })

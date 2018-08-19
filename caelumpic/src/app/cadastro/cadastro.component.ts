@@ -2,16 +2,24 @@ import { Component } from '@angular/core';
 import { FotoService } from '../servicos/foto.service';
 import { FotoComponent } from '../foto/foto.component';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 @Component({
     selector: 'cadastro',
     templateUrl: './cadastro.component.html'
 })
 export class CadastroComponent {
     foto = new FotoComponent();
-    mensagem; // Nova propriedade
+    mensagem;
+    formCadastro: FormGroup;
     constructor(private servico: FotoService
         , private rota: ActivatedRoute
-        , private roteador: Router) {
+        , private roteador: Router
+        , private formBuilder: FormBuilder) {
+        this.formCadastro = formBuilder.group({
+            titulo: ['', Validators.required],
+            url: ['', Validators.required],
+            descricao: ''
+        });
         this.rota.params
             .subscribe(
                 parametros => {
