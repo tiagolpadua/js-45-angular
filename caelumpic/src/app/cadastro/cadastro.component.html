@@ -2,6 +2,11 @@
   <h1 class="text-center">Cadastrar Fotos</h1>
 </header>
 <main class="container">
+  <div class="row" *ngIf="mensagem">
+    <div class="col-sm-12">
+      <mensagem tipo="success">{{mensagem}}</mensagem>
+    </div>
+  </div>
   <section class="row">
     <form class="col-sm-7" (ngSubmit)="salvar()">
       <div class="form-group">
