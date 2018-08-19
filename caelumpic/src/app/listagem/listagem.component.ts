@@ -16,6 +16,11 @@ export class ListagemComponent {
             );
     }
     remover(foto: FotoComponent): void {
-        console.log(`Foto ${foto.titulo} apagada com sucesso!`);
+        this.servico
+            .deletar(foto)
+            .subscribe(
+                () => console.log(`Foto ${foto.titulo} apagada com sucesso!`)
+                , erro => console.log(erro)
+            );
     }
 }
