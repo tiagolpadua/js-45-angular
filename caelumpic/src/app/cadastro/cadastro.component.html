@@ -12,9 +12,17 @@
       <div class="form-group">
         <label>Título</label>
         <input formControlName="titulo" name="titulo" [(ngModel)]="foto.titulo" class="form-control">
-        <span *ngIf="formCadastro.controls.titulo.invalid" class="form-control alert-danger">
-          Título obrigatório
-        </span>
+        <!-- validação do campo titulo primeiro -->
+        <div *ngIf="!formCadastro.controls.titulo.valid">
+          <!-- acessa a propriedade errors que só existe caso titulo for inválido -->
+          <span *ngIf="formCadastro.controls.titulo.errors.required" class="form-control alert-danger">
+            Título obrigatório
+          </span>
+          <!-- mensagem de validação por tamanho -->
+          <span *ngIf="formCadastro.controls.titulo.errors.minlength" class="form-control alert-danger">
+            Título deve ter no mínimo 3 caracteres
+          </span>
+        </div>
       </div>
       <div class="form-group">
         <label>URL</label>
