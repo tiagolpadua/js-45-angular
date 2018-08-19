@@ -13,13 +13,17 @@
         <span class="input-group-prepend">
           <a routerLink="/cadastro" class="btn btn-primary">Nova foto</a>
         </span>
+        <!-- campo para filtrar pelo titulo -->
+        <input #inputBusca type="search" class="form-control" placeholder="filtrar pelo títul
+    o da foto">
       </form>
     </div>
   </div>
   <div class="row">
-    <painel *ngFor="let foto of listaFotos" titulo="{{foto.titulo}}" class="col-md-2">
+    <painel *ngFor="let foto of listaFotos | filtroPorTitulo:inputBusca.value" titulo="{{foto.titulo}
+      }" class="col-md-2">
       <a [routerLink]="['/cadastro', foto._id]">
-        <foto titulo="{{foto.titulo}}" url="{{foto.url}}"></foto>
+        <foto url="{{foto.url}}" titulo="{{foto.titulo}}"></foto>
       </a>
       <button (click)="remover(foto)" class="btn btn-danger btn-block">Remover</button>
     </painel>
