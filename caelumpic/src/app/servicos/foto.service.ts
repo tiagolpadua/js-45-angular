@@ -14,21 +14,21 @@ export class FotoService {
     listar(): Observable<FotoComponent[]> {
         return this.http.get<FotoComponent[]>(this.url);
     }
-    cadastrar(foto: FotoComponent): Observable<Object> {
+    cadastrar(foto: FotoComponent): Observable<MensagensServico> {
         return this.http
             .post(this.url, foto, this.cabecalho)
             .pipe(
                 map(
-                    () => ({ mensagem: `Foto ${foto.titulo} salva com sucesso` })
+                    () => new MensagensServico(`Foto ${foto.titulo} cadastrada com sucesso`)
                 )
             );
     }
-    deletar(foto: FotoComponent): Observable<Object> {
+    deletar(foto: FotoComponent): Observable<MensagensServico> {
         return this.http
             .delete(this.url + foto._id)
             .pipe(
                 map(
-                    () => ({ mensagem: `Foto ${foto.titulo} apagada com sucesso` })
+                    () => new MensagensServico(`Foto ${foto.titulo} apagada com sucesso`)
                 )
             );
     }
@@ -36,13 +36,21 @@ export class FotoService {
         return this.http.get<FotoComponent>(this.url + idFoto);
     }
     // Implementação do método alterar
-    alterar(foto: FotoComponent): Observable<Object> {
+    alterar(foto: FotoComponent): Observable<MensagensServico> {
         return this.http
             .put(this.url + foto._id, foto, this.cabecalho)
             .pipe(
                 map(
-                    () => ({ mensagem: `Foto ${foto.titulo} atualizada com sucesso` })
+                    () => new MensagensServico(`Foto ${foto.titulo} alterada com sucesso`)
                 )
             );
+    }
+}
+
+export class MensagensServico {
+    constructor(private _mensagem: string) {
+    }
+    public get mensagem(): string {
+        return this._mensagem;
     }
 }
