@@ -2,6 +2,11 @@
   <h1 class="text-center">{{title}}</h1>
 </header>
 <main class="container">
+  <div class="row" *ngIf="mensagem">
+    <div class="col-sm-12">
+      <p class="alert alert-success">{{mensagem}}</p>
+    </div>
+  </div>
   <div class="row mb-4">
     <div class="col-sm-12">
       <form class="input-group">
