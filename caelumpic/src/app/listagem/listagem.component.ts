@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { FotoService } from '../servicos/foto.service'; // Importou FotoService
+import { FotoService } from '../servicos/foto.service';
+import { FotoComponent } from '../foto/foto.component';
 @Component({
     selector: 'listagem',
     templateUrl: './listagem.component.html'
@@ -7,11 +8,14 @@ import { FotoService } from '../servicos/foto.service'; // Importou FotoService
 export class ListagemComponent {
     title = 'Caelum Pic';
     listaFotos;
-    constructor(private servico: FotoService) { // Injetou FotoService
+    constructor(private servico: FotoService) {
         servico.listar()
             .subscribe(
                 fotosApi => this.listaFotos = fotosApi
                 , erro => console.log(erro)
             );
+    }
+    remover(foto: FotoComponent): void {
+        console.log(`Foto ${foto.titulo} apagada com sucesso!`);
     }
 }
