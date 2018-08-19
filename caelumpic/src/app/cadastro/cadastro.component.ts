@@ -22,14 +22,23 @@ export class CadastroComponent {
             );
     }
     salvar() {
-        this.servico
-            .cadastrar(this.foto) // Usou FotoService
-            .subscribe(
-                () => {
-                    console.log(`Foto ${this.foto.titulo} salva com sucesso`);
-                    this.foto = new FotoComponent();
-                }
-                , erro => console.log(erro)
-            );
+        if (this.foto._id) {
+            this.servico
+                .alterar(this.foto)
+                .subscribe(
+                    () => console.log(`Foto ${this.foto.titulo} alterada com sucesso`)
+                    , erro => console.log(erro)
+                );
+        } else {
+            this.servico
+                .cadastrar(this.foto)
+                .subscribe(
+                    () => {
+                        console.log(`Foto ${this.foto.titulo} salva com sucesso`);
+                        this.foto = new FotoComponent();
+                    }
+                    , erro => console.log(erro)
+                );
+        }
     }
 }
