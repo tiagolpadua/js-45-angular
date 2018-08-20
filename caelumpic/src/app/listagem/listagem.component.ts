@@ -7,7 +7,7 @@ import { FotoComponent } from '../foto/foto.component';
 })
 export class ListagemComponent {
     title = 'Caelum Pic';
-    listaFotos;
+    listaFotos: FotoComponent[] = [];
     mensagem: string;
     constructor(private servico: FotoService) {
         servico.listar()
