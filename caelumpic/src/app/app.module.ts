@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { roteamento } from './app.routes';
+import { BotaoModule } from './botao/botao.module';
 import { CadastroComponent } from './cadastro/cadastro.component';
 import { FotoModule } from './foto/foto.module';
 import { ListagemComponent } from './listagem/listagem.component';
@@ -24,7 +25,8 @@ import { FotoService } from './servicos/foto.service'; // Importou FotoService
     FotoModule,
     PainelModule,
     roteamento,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BotaoModule
   ],
   providers: [
     FotoService
