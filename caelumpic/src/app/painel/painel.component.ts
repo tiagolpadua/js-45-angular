@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, ElementRef } from '@angular/core';
+import * as $ from "jquery";
 @Component({
     selector: 'painel',
     templateUrl: './painel.component.html',

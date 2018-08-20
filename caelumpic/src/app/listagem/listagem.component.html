@@ -19,11 +19,15 @@
     </div>
   </div>
   <div class="row">
-    <painel *ngFor="let foto of listaFotos | filtroPorTitulo:inputBusca.value" titulo="{{foto.titulo}}" c lass="col-md-2">
-      <a [routerLink]="['/cadastro', foto._id]">
-        <foto url="{{foto.url}}" titulo="{{foto.titulo}}"></foto>
-      </a>
-      <botao nome="Remover" confirmacao="true" estilo="btn-danger btn-block" (acao)="remover(foto)"></botao>
-    </painel>
+    <div class="row">
+      <painel #painel *ngFor="let foto of listaFotos | filtroPorTitulo:inputBusca.value" titulo="{{foto
+          .titulo}}" class="col-md-2">
+        <a [routerLink]="['/cadastro', foto._id]">
+          <foto url="{{foto.url}}" titulo="{{foto.titulo}}"></foto>
+        </a>
+        <botao confirmacao="true" nome="Remover" estilo="btn-danger btn-block" (acao)="remover(foto,
+          painel)"></botao>
+      </painel>
+    </div>
   </div>
 </main>
