@@ -10,6 +10,13 @@ export class CadastroComponent {
     foto = new FotoComponent();
     constructor(private servico: FotoService
         , private rota: ActivatedRoute) {
+        if (this.rota.snapshot.params.idFoto) {
+            this.servico
+                .obterFoto(this.rota.snapshot.params.idFoto)
+                .subscribe(fotoDaApi => this.foto = fotoDaApi);
+        }
+
+        /*
         this.rota.params
             .subscribe(
                 parametros => {
@@ -20,6 +27,7 @@ export class CadastroComponent {
                     }
                 }
             );
+            */
     }
     salvar() {
         this.servico
