@@ -31,12 +31,28 @@ export class CadastroComponent {
                     if (parametros.idFoto) {
                         this.servico
                             .obterFoto(parametros.idFoto)
-                            .subscribe(fotoDaApi => this.foto = fotoDaApi);
+                            .subscribe(fotoDaApi => {
+                                this.foto = fotoDaApi;
+
+                                // this.formCadastro.get('titulo').setValue(fotoApi.titulo)
+                                // this.formCadastro.get('url').setValue(fotoApi.url)
+                                // this.formCadastro.get('descricao').setValue(fotoApi.descricao)
+                                // ou
+                                // this.formCadastro.setValue(fotoApi)
+                                // ou essa lindeza
+                                this.formCadastro.patchValue(fotoDaApi);
+                            });
                     }
                 }
             );
     }
     salvar() {
+        // this.foto.titulo = this.formCadastro.get('titulo').value
+        // this.foto.url = this.formCadastro.get('url').value
+        // this.foto.descricao = this.formCadastro.get('descricao').value
+        // ou essa lindeza
+        this.foto = { ...this.foto, ...this.formCadastro.value }
+
         if (this.foto._id) {
             this.servico
                 .alterar(this.foto)
