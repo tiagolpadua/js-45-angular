@@ -6,6 +6,7 @@ import { FotoComponent } from '../foto/foto.component';
     templateUrl: './listagem.component.html'
 })
 export class ListagemComponent {
+    filtro = '';
     title = 'Caelum Pic';
     listaFotos: FotoComponent[] = [];
     mensagem: string;
