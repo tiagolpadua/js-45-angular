@@ -2,6 +2,5 @@
   <h1 class="text-center">{{ title }}</h1>
 </header>
 <main class="container">
-  {{ listaFotos }} <foto url="assets/img/leao.jpg" titulo="Leão"></foto>
-  <foto url="assets/img/leao-branco.jpg" titulo="Leão	branco"></foto>
+  <foto *ngFor="let foto of listaFotos" url="{{ foto.url }}" titulo="{{ foto.titulo }}"></foto>
 </main>
