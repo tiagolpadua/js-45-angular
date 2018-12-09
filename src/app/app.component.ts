@@ -6,5 +6,10 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AppComponent {
   title = 'Caelum	Pic';
-  constructor(http: HttpClient) {}
+  listaFotos;
+  constructor(http: HttpClient) {
+    http
+      .get('http://localhost:3000/v1/fotos')
+      .subscribe(fotosApi => (this.listaFotos = fotosApi), erro => console.log(erro));
+  }
 }
