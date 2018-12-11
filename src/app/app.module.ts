@@ -6,9 +6,10 @@ import { FotoModule } from './foto/foto.module';
 import { PainelModule } from './painel/painel.module';
 import { CadastroComponent } from './cadastro/cadastro.component';
 import { ListagemComponent } from './listagem/listagem.component';
+import { roteamento } from './app.routes';
 @NgModule({
   declarations: [AppComponent, CadastroComponent, ListagemComponent],
-  imports: [BrowserModule, HttpClientModule, FotoModule, PainelModule],
+  imports: [BrowserModule, HttpClientModule, FotoModule, PainelModule, roteamento],
   providers: [],
   bootstrap: [AppComponent]
 })
