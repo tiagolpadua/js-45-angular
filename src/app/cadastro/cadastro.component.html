@@ -1,7 +1,7 @@
 <header class="jumbotron"><h1 class="text-center">Cadastrar Fotos</h1></header>
 <main class="container">
   <section class="row">
-    <form class="col-sm-7">
+    <form class="col-sm-7" (submit)="salvar($event)">
       <div class="form-group"><label>Título</label> <input [value]="foto.titulo" class="form-control" /></div>
       <div class="form-group"><label>URL</label> <input [value]="foto.url" class="form-control" /></div>
       <div class="form-group">
