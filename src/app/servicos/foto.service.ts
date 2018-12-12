@@ -12,4 +12,7 @@ export class FotoService {
   listar(): Observable<FotoComponent[]> {
     return this.http.get<FotoComponent[]>(this.url);
   }
+  cadastrar(foto: FotoComponent): Observable<Object> {
+    return this.http.post(this.url, foto, this.cabecalho);
+  }
 }
