@@ -15,12 +15,15 @@ export class FotoService {
   cadastrar(foto: FotoComponent): Observable<Object> {
     return this.http.post(this.url, foto, this.cabecalho);
   }
-  // Implementação	do	método	deletar
   deletar(foto: FotoComponent): Observable<Object> {
     return this.http.delete(this.url + foto._id);
   }
-
   obterFoto(idFoto: string): Observable<FotoComponent> {
     return this.http.get<FotoComponent>(this.url + idFoto);
+  }
+
+  // Implementação	do	método	alterar
+  alterar(foto: FotoComponent): Observable<Object> {
+    return this.http.put(this.url + foto._id, foto, this.cabecalho);
   }
 }
