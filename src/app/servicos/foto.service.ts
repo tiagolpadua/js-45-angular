@@ -13,21 +13,30 @@ export class FotoService {
   listar(): Observable<FotoComponent[]> {
     return this.http.get<FotoComponent[]>(this.url);
   }
-  cadastrar(foto: FotoComponent): Observable<Object> {
+  cadastrar(foto: FotoComponent): Observable<MensagensServico> {
     return this.http
       .post(this.url, foto, this.cabecalho)
-      .pipe(map(() => ({ mensagem: `Foto	${foto.titulo}	salva	com	sucesso` })));
+      .pipe(map(() => new MensagensServico(`Foto	${foto.titulo}	cadastrada	com	sucesso`)));
   }
-  deletar(foto: FotoComponent): Observable<Object> {
-    return this.http.delete(this.url + foto._id).pipe(map(() => ({ mensagem: `Foto	${foto.titulo}	apagada	com	sucesso` })));
+  deletar(foto: FotoComponent): Observable<MensagensServico> {
+    return this.http
+      .delete(this.url + foto._id)
+      .pipe(map(() => new MensagensServico(`Foto	${foto.titulo}	apagada	com	sucesso`)));
   }
   obterFoto(idFoto: string): Observable<FotoComponent> {
     return this.http.get<FotoComponent>(this.url + idFoto);
   }
 
-  alterar(foto: FotoComponent): Observable<Object> {
+  alterar(foto: FotoComponent): Observable<MensagensServico> {
     return this.http
       .put(this.url + foto._id, foto, this.cabecalho)
-      .pipe(map(() => ({ mensagem: `Foto	${foto.titulo}	atualizada	com	sucesso` })));
+      .pipe(map(() => new MensagensServico(`Foto	${foto.titulo}	alterada	com	sucesso`)));
+  }
+}
+
+export class MensagensServico {
+  constructor(private _mensagem: string) {}
+  public get mensagem(): string {
+    return this._mensagem;
   }
 }
