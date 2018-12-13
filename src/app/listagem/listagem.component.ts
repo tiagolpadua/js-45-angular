@@ -12,8 +12,12 @@ export class ListagemComponent {
     servico.listar().subscribe(fotosApi => (this.listaFotos = fotosApi), erro => console.log(erro));
   }
   remover(foto: FotoComponent): void {
-    this.servico
-      .deletar(foto)
-      .subscribe(() => console.log(`Foto	${foto.titulo}	apagada	com	sucesso!`), erro => console.log(erro));
+    this.servico.deletar(foto).subscribe(
+      () => {
+        console.log(`Foto	${foto.titulo}	apagada	com	sucesso!`);
+        this.listaFotos = this.listaFotos.filter(f => f._id !== foto._id); // Usando	filter
+      },
+      erro => console.log(erro)
+    );
   }
 }
