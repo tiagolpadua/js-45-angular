@@ -19,4 +19,8 @@ export class FotoService {
   deletar(foto: FotoComponent): Observable<Object> {
     return this.http.delete(this.url + foto._id);
   }
+
+  obterFoto(idFoto: string): Observable<FotoComponent> {
+    return this.http.get<FotoComponent>(this.url + idFoto);
+  }
 }
