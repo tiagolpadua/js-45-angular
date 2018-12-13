@@ -19,18 +19,18 @@ export class CadastroComponent {
   salvar() {
     if (this.foto._id) {
       this.servico.alterar(this.foto).subscribe(
-        () => {
-          // Mensagem	de	alteração
-          this.mensagem = `Foto	${this.foto.titulo}	alterada	com	sucesso`;
+        // agora	temos	um	objeto	disponível
+        mensagemServico => {
+          this.mensagem = mensagemServico.mensagem;
           setTimeout(() => this.roteador.navigate(['']), 3000);
         },
         erro => console.log(erro)
       );
     } else {
       this.servico.cadastrar(this.foto).subscribe(
-        () => {
-          // Mensagem	de	inserção
-          this.mensagem = `Foto	${this.foto.titulo}	salva	com	sucesso`;
+        // agora	temos	um	objeto	disponível
+        mensagemServico => {
+          this.mensagem = mensagemServico.mensagem;
           this.foto = new FotoComponent();
         },
         erro => console.log(erro)
