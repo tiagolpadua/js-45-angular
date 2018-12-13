@@ -12,6 +12,8 @@ export class ListagemComponent {
     servico.listar().subscribe(fotosApi => (this.listaFotos = fotosApi), erro => console.log(erro));
   }
   remover(foto: FotoComponent): void {
-    console.log(`Foto	${foto.titulo}	apagada	com	sucesso!`);
+    this.servico
+      .deletar(foto)
+      .subscribe(() => console.log(`Foto	${foto.titulo}	apagada	com	sucesso!`), erro => console.log(erro));
   }
 }
