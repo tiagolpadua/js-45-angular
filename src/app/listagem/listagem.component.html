@@ -11,7 +11,8 @@
   </div>
   <div class="row">
     <painel *ngFor="let foto of listaFotos" titulo="{{ foto.titulo }}" class="col-md-2">
-      <foto url="{{ foto.url }}" titulo="{{ foto.titulo }}"></foto>
+      <foto titulo="{{ foto.titulo }}" url="{{ foto.url }}"></foto>
+      <button (click)="remover(foto)" class="btn	btn-danger	btn-block">Remover</button>
     </painel>
   </div>
 </main>
