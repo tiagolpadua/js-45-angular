@@ -8,14 +8,17 @@ import { FotoComponent } from '../foto/foto.component';
 export class ListagemComponent {
   title = 'Caelum	Pic';
   listaFotos;
+  mensagem: string;
   constructor(private servico: FotoService) {
     servico.listar().subscribe(fotosApi => (this.listaFotos = fotosApi), erro => console.log(erro));
   }
+
   remover(foto: FotoComponent): void {
     this.servico.deletar(foto).subscribe(
       () => {
-        console.log(`Foto	${foto.titulo}	apagada	com	sucesso!`);
+        this.mensagem = `Foto	${foto.titulo}	apagada	com	sucesso!`;
         this.listaFotos = this.listaFotos.filter(f => f._id !== foto._id); // Usando	filter
+        setTimeout(() => (this.mensagem = ''), 2000);
       },
       erro => console.log(erro)
     );
