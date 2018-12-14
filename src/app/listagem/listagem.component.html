@@ -12,7 +12,7 @@
       <form class="input-group">
         <span class="input-group-prepend"> <a routerLink="/cadastro" class="btn btn-primary">Nova foto</a> </span>
         <!-- campo para filtrar pelo titulo -->
-        <input #inputBusca type="search" class="form-control" placeholder="filtrar pelo título da foto" />
+        <input (keyup)="(0)" #inputBusca type="search" class="form-control" placeholder="filtrar pelo título da foto" />
       </form>
     </div>
   </div>
