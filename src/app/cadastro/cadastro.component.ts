@@ -2,20 +2,29 @@ import { Component } from '@angular/core';
 import { FotoService } from '../servicos/foto.service';
 import { FotoComponent } from '../foto/foto.component';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+
 @Component({
   selector: 'cadastro',
   templateUrl: './cadastro.component.html'
 })
 export class CadastroComponent {
   foto = new FotoComponent();
-  mensagem; // Nova	propriedade
-  constructor(private servico: FotoService, private rota: ActivatedRoute, private roteador: Router) {
-    this.rota.params.subscribe(parametros => {
-      if (parametros.idFoto) {
-        this.servico.obterFoto(parametros.idFoto).subscribe(fotoDaApi => (this.foto = fotoDaApi));
-      }
+  mensagem;
+  formCadastro: FormGroup;
+  constructor(
+    private servico: FotoService,
+    private rota: ActivatedRoute,
+    private roteador: Router,
+    private formBuilder: FormBuilder
+  ) {
+    this.formCadastro = formBuilder.group({
+      titulo: ['', Validators.required],
+      url: ['', Validators.required],
+      descricao: ''
     });
   }
+
   salvar() {
     if (this.foto._id) {
       this.servico.alterar(this.foto).subscribe(
